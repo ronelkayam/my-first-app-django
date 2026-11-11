@@ -1,0 +1,11 @@
+django>=5.0,<6.0
+python-dotenv>=1.0.0
+
+# בחר את הספריות בהתאם למסד הנתונים שאתה עובד איתו בפרויקט:
+# אם אתה עובד עם SQL Server:
+mssql-django>=1.4.0
+pyodbc>=5.0.0
+
+# אם אתה עובד עם MongoDB (שים לב שזה במקום SQL Server):
+# djongo>=1.3.6
+# pymongo>=4.0.0

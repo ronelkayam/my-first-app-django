@@ -14,25 +14,29 @@ from pathlib import Path
 import os
 from dotenv import load_dotenv
 
+# load_dotenv טוען את כל משתני הסביבה מקובץ ה-.env אל תוך הסביבה (os.environ)
 load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+# מגדיר את תיקיית הששורש (Root) של הפרויקט
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+# מפתח האבטחה של דג'נגו - חייב להישאר סודי ואסור להעלות אותו ל-GitHub
 SECRET_KEY = 'django-insecure-na9)^bpfx&((oek2y(pr9=%s$q)(q=7l3-(_&_#3t-@hc0&_y2'
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# מצב פיתוח (Debug). חייב להיות False בסביבת ייצור (Production) כדי לא לחשוף שגיאות רגישות
 DEBUG = True
 # DEBUG = os.getenv('DEBUG')=='True'
 
 ALLOWED_HOSTS = []
 
 # Application definition
-
+# INSTALLED_APPS: כל אפליקציה חדשה שיוצרים בפרויקט חייבת להיות רשומה כאן כדי שדג'נגו תכיר אותה
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -40,14 +44,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'gym_tracker',
+    'gym_tracker', # האפליקציה המקומית שלנו לפרויקט
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware', # SECURITY: הגנה מפני בקשות זדוניות חוצה-אתרים (CSRF)
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -59,7 +63,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [],
-        'APP_DIRS': True,
+        'APP_DIRS': True, # מאפשר לדג'נגו לחפש אוטומטית תיקיית templates בתוך כל אפליקציה
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.request',
@@ -78,10 +82,11 @@ WSGI_APPLICATION = 'core.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3', # מסד הנתונים הרלאציוני המקומי שלנו לפיתוח
     }
 }
 
+# הגדרות מותאמות אישית לחיבור למסד נתונים NoSQL (MongoDB) באמצעות משתני סביבה
 MONGO_URI = os.getenv('MONGO_URI')
 MONGO_DBNAME = os.getenv('MONGO_DBNAME')
 
